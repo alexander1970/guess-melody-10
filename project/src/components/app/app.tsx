@@ -8,12 +8,16 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 import WinScreen from '../../pages/win-screen/win-screen';
+import { QuestionGenre, Questions } from '../../types/question';
 
 type AppScreenProps = {
   errorsCount: number;
+  questions: Questions;
 }
 
-function App({errorsCount}: AppScreenProps): JSX.Element {
+function App({errorsCount, questions}: AppScreenProps): JSX.Element {
+  const [firstQuestion] = questions;
+
   return (
     <BrowserRouter>
       <Routes>
@@ -27,7 +31,11 @@ function App({errorsCount}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.DevGenre}
-          element={<GenreQuestionScreen />}
+          element={
+            <GenreQuestionScreen
+              question={firstQuestion as QuestionGenre}
+            />
+          }
         />
         <Route
           path={AppRoute.Login}

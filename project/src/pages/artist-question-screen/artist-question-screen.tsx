@@ -5,10 +5,11 @@ import { QuestionArtist, UserArtistQuestionAnswer } from '../../types/question';
 type ArtistQuestionScreenProps = {
   question: QuestionArtist,
   onAnswer: (question: QuestionArtist, answer: UserArtistQuestionAnswer) => void;
+  renderPlayer: (src: string, playerIndex: number) => JSX.Element;
 };
 
 function ArtistQuestionScreen(props: ArtistQuestionScreenProps): JSX.Element {
-  const {question, onAnswer} = props;
+  const {question, onAnswer, renderPlayer} = props;
   const {answers, song} = question;
 
   return (
@@ -33,12 +34,7 @@ function ArtistQuestionScreen(props: ArtistQuestionScreenProps): JSX.Element {
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <button className="track__button track__button--play" type="button"></button>
-            <div className="track__status">
-              <audio
-                src={song.src}
-              />
-            </div>
+            {renderPlayer(song.src, 0)}
           </div>
         </div>
 
